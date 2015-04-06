@@ -1,0 +1,8 @@
+{
+    "Ticket URLs": [
+        "https://jira.atlassian.com/rest/api/latest/issue/JRA-9",
+        "https://jira.atlassian.com/rest/api/latest/issue/JRA-14",
+        "https://jira.atlassian.com/rest/api/latest/issue/JRA-27",
+        "https://jira.atlassian.com/rest/api/latest/issue/JRA-98"
+    ]
+}
