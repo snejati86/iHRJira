@@ -19,9 +19,6 @@ public class JiraTicketAdapter extends RecyclerView.Adapter<JiraTicketAdapter.Vi
 
     List<JiraTicket> mList = null;
 
-    public JiraTicketAdapter(List<JiraTicket> jiraTicketList){
-        mList = jiraTicketList;
-    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -41,6 +38,10 @@ public class JiraTicketAdapter extends RecyclerView.Adapter<JiraTicketAdapter.Vi
     @Override
     public int getItemCount() {
         return mList.size();
+    }
+
+    public void setList(List<JiraTicket> list) {
+        this.mList = list;
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {

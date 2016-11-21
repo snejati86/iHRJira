@@ -1,6 +1,7 @@
 package com.iheartradio.android.ihrjira;
 
 import android.app.Fragment;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -44,11 +45,23 @@ public class JiraFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
+        final JiraTicketAdapter adapter = new JiraTicketAdapter();
 
 
-        TicketParser ticketParser = new TicketParser(getActivity());
-        List<JiraTicket> list = ticketParser.parseJsonTickets();
-        JiraTicketAdapter adapter = new JiraTicketAdapter(list);
+        final TicketParser ticketParser = new TicketParser(getActivity());
+        new AsyncTask<Void,Void,List<JiraTicket>>(){
+
+            @Override
+            protected List<JiraTicket> doInBackground(Void... params) {
+                List<JiraTicket> list = ticketParser.parseJsonTickets();
+                return list;
+            }
+
+            @Override
+            protected void onPostExecute(List<JiraTicket> jiraTickets) {
+                adapter.setList(jiraTickets);
+            }
+        }.execute();
         recyclerView.setAdapter(adapter);
         return view;
     }
