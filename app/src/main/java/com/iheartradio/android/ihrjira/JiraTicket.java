@@ -1,7 +1,7 @@
 package com.iheartradio.android.ihrjira;
 
 /**
- * Created by sinasix on 11/20/16.
+ * Jira ticket model.
  */
 public class JiraTicket {
     private String ticketName;

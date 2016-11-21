@@ -13,10 +13,15 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Created by sinasix on 11/20/16.
+ * Simple parser to parse static jira tickets.
  */
 
+
 public class TicketParser {
+
+    private static final String TICKETS_JSON = "tickets.json";
+
+    private static final String UTF_8 = "UTF-8";
 
     private final Context mContext;
 
@@ -26,15 +31,15 @@ public class TicketParser {
 
     public List<JiraTicket> parseJsonTickets() {
         List<JiraTicket> jiraTickets = new ArrayList<>();
-        String json = null;
+        String outerJson = null;
         InputStream is = null;
         try {
-            is = mContext.getAssets().open("tickets.json");
+            is = mContext.getAssets().open(TICKETS_JSON);
             int size = is.available();
             byte[] buffer = new byte[size];
             is.read(buffer);
             is.close();
-            json = new String(buffer, "UTF-8");
+            outerJson = new String(buffer, UTF_8);
         } catch (IOException ex) {
             ex.printStackTrace();
             return null;
@@ -49,8 +54,8 @@ public class TicketParser {
             }
         }
         try {
-            JSONObject obj = new JSONObject(json);
-            JSONArray tickets = obj.getJSONArray("Ticket URLs");
+            JSONObject jsonObject = new JSONObject(outerJson);
+            JSONArray tickets = jsonObject.getJSONArray("Ticket URLs");
             for ( int i = 0 ; i < tickets.length() ; ++i ){
                 String ticketUrl = tickets.getString(i);
                 JiraTicket jiraTicket = new JiraTicket();

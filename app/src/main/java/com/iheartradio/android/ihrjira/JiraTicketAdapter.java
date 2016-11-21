@@ -12,7 +12,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Created by sinasix on 11/20/16.
+ * Adapter for holding Jira Ticket objects.
  */
 
 public class JiraTicketAdapter extends RecyclerView.Adapter<JiraTicketAdapter.ViewHolder> {
